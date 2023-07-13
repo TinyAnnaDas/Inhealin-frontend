@@ -1,24 +1,22 @@
 import axios from '../../Utils/axios';
-import React, { useEffect, useState, useMemo, useRef } from 'react'
+import React, { useEffect, useState} from 'react'
 
 import {retrieveChat} from "../../Utils/constants"
-import { RetriveTherapySession } from '../../Utils/constants';
 import { useSelector } from 'react-redux';
 import {v4 as uuidv4} from "uuid"
-import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-// {therapistChat, setTherapistChat, handleTherapistChat,  chatFromServerTherapist, clientChat, setClientChat, handleClientChat, chatFromServerClient}
 
 const Chats = ({clients, therapists}) => {
-  const wsRef = useRef(null);
+ 
   console.log(therapists)
 
   const [groupName, setGroupName] = useState("")
 
   const [chat, setChat] = useState("")
 
-  const [chatFromServer, setChatFromServer] = useState([])
+
 
   const [allChats, setAllChats] = useState([])
+
 
   const [ws, setWs] = useState(null); 
 
@@ -30,7 +28,7 @@ const Chats = ({clients, therapists}) => {
   console.log(user)
 
 
-  const user_id = user&&user.user_id || therapist&&therapist.user_id
+  const user_id = (user&&user.user_id) || (therapist&&therapist.user_id)
 
   
 
@@ -76,7 +74,7 @@ const Chats = ({clients, therapists}) => {
       .catch((error)=>console.log(error))
 
 
-      const newWs = new WebSocket('ws://127.0.0.1:8000/ws/ajwc/' + groupName + '/' + user_id + '/');
+      const newWs = new WebSocket('wss://inhealin.website/ws/ajwc/' + groupName + '/' + user_id + '/');
 
 
       newWs.onopen = ()=> {
@@ -110,7 +108,7 @@ const Chats = ({clients, therapists}) => {
       setWs(newWs);
 
     }
-  }, [groupName]);
+  }, [groupName, access, user_id]);
 
 
 
@@ -273,10 +271,12 @@ const Chats = ({clients, therapists}) => {
                          {/* { chat.owner=== user&&user.user_id || chat.owner===therapist&&therapist.user_id ? */}
             <div className="flex flex-col h-full overflow-x-auto mb-4">
               <div className="flex flex-col h-full ">
-                {allChats.length!==0?
+
+                
+                
 
 
-                      (<div className="grid grid-cols-12 gap-y-2">
+                      <div className="grid grid-cols-12 gap-y-2">
                         { allChats.map((chat, index)=> {
 
                                 const isUserOwner = user && chat.owner === user.user_id;
@@ -330,24 +330,12 @@ const Chats = ({clients, therapists}) => {
 
                         }
 
-                      </div>):
+                      </div>
 
-                      (<div className="grid  justify-center ">
-                         <div  className="col-start-6 col-end-13 p-3 rounded-lg">
-                          <div className="flex items-center  justify-center">
-                            <div className=" flex flex-col items-center justify-center p-3  rounded-md bg-indigo-500 flex-shrink-0 text-white font-medium">
-                              {therapist&&`Please select client to chat with...` }
-                              {user&&`Please select your therapist to chat with...` }
-                              
-                              <ChatBubbleOutlineOutlinedIcon className='mt-3'/>
-                            </div>
-                        </div>
-                        </div>
-                       
-                      </div>)
+                     
                 
                 
-                }
+                
                
 
 
