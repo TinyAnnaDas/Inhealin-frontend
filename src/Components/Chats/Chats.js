@@ -1,5 +1,5 @@
 import axios from '../../Utils/axios';
-import React, { useEffect, useState} from 'react'
+import React, { useEffect, useState, useRef} from 'react'
 
 import {retrieveChat} from "../../Utils/constants"
 import { useSelector } from 'react-redux';
@@ -75,6 +75,7 @@ const Chats = ({clients, therapists}) => {
 
 
       const newWs = new WebSocket('wss://inhealin.website/ws/ajwc/' + groupName + '/' + user_id + '/');
+      // const newWs = new WebSocket('ws://localhost:8000/ws/ajwc/' + groupName + '/' + user_id + '/');
 
 
       newWs.onopen = ()=> {
@@ -141,7 +142,11 @@ const Chats = ({clients, therapists}) => {
 
     
   
+const ref = useRef()
 
+// useEffect(()=> {
+//   ref.current?.scrollIntoView({behavior: "smooth", block: "end" })
+// }, [chat])
   // console.log(chatFromServer)
 
   return (
@@ -263,80 +268,71 @@ const Chats = ({clients, therapists}) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col flex-auto h-full p-6">
+        <div className="flex flex-col flex-auto h-full p-6" >
           <div
-            className="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4"
+            className="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4" 
           >
 
                          {/* { chat.owner=== user&&user.user_id || chat.owner===therapist&&therapist.user_id ? */}
-            <div className="flex flex-col h-full overflow-x-auto mb-4">
-              <div className="flex flex-col h-full ">
-
-                
-                
+            <div className="flex flex-col h-full overflow-x-auto mb-4" >
+              <div className="flex flex-col h-full " ref={ref}>
 
 
-                      <div className="grid grid-cols-12 gap-y-2">
-                        { allChats.map((chat, index)=> {
+                <div className="grid grid-cols-12 gap-y-2">
+                  { allChats.map((chat, index)=> {
 
-                                const isUserOwner = user && chat.owner === user.user_id;
-                                const isTherapistOwner = therapist && chat.owner === therapist.user_id;
+                          const isUserOwner = user && chat.owner === user.user_id;
+                          const isTherapistOwner = therapist && chat.owner === therapist.user_id;
 
-                              return(
-                                
+                        return(
+                          
 
-                                  <React.Fragment key={index}>
-                                    {isUserOwner || isTherapistOwner  ? (
+                            <React.Fragment key={index}>
+                              {isUserOwner || isTherapistOwner  ? (
 
-                                      <div  className="col-start-6 col-end-13 p-3 rounded-lg">
-                                          <div className="flex items-center justify-start flex-row-reverse">
-                                            <div
-                                              className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                                            >
-                                              {user?.name.charAt(0).toUpperCase() || therapist?.name.charAt(0).toUpperCase()} 
-                                            </div>
-                                            <div
-                                              className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
-                                            >
-                                              <div>{chat.content}</div>
-                                            </div>
-                                          </div>
+                                <div  className="col-start-6 col-end-13 p-3 rounded-lg">
+                                    <div className="flex items-center justify-start flex-row-reverse">
+                                      <div
+                                        className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
+                                      >
+                                        {user?.name.charAt(0).toUpperCase() || therapist?.name.charAt(0).toUpperCase()} 
                                       </div>
-
-                                    ):(
-
-                                      <div key={`${chat.id}-${uuidv4()}`} className="col-start-1 col-end-8 p-3 rounded-lg">
-                                        <div className="flex flex-row items-center">
-                                          <div
-                                            className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
-                                          >
-                                            A
-                                          </div>
-                                          <div
-                                            className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
-                                          >
-                                            <div>{chat.content}</div>
-                                          </div>
-                                        </div>
+                                      <div
+                                        className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl"
+                                      >
+                                        <div>{chat.content}</div>
                                       </div>
-                                      
-                                    )}
-                                  </React.Fragment>
+                                    </div>
+                                </div>
+
+                              ):(
+
+                                <div key={`${chat.id}-${uuidv4()}`} className="col-start-1 col-end-8 p-3 rounded-lg">
+                                  <div className="flex flex-row items-center">
+                                    <div
+                                      className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0"
+                                    >
+                                      A
+                                    </div>
+                                    <div
+                                      className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl"
+                                    >
+                                      <div>{chat.content}</div>
+                                    </div>
+                                  </div>
+                                </div>
                                 
-                              
-                                
-                              )
-                        })
+                              )}
+                            </React.Fragment>
+                          
+                        
+                          
+                        )
+                  })
 
-                        }
+                  }
 
-                      </div>
-
-                     
-                
-                
-                
-               
+                </div>
 
 
               </div>

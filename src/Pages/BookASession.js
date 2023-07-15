@@ -48,9 +48,7 @@ const BookASession = () => {
       })
     }, [RetrieveUpcomingTherapySessionClient])
 
-    const therapySessionExists = () => {
-      
-    }
+  
 
     useEffect(()=>{
         axios.get(`${retrieveTherapistAdditionalDetails}${therapistId}`)

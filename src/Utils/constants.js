@@ -19,6 +19,9 @@ export const createMemberURL = "admin/create_member/"
 export const getMemberURL = "admin/get_member/"
 export const deleteMemberURL = "admin/delete_member/"
 
+export const getCountURL = "admin/get_count/"
+export const getClientPlanStatisticsURL = "admin/get_client_plan_statistics/"
+
 
 
 
@@ -38,6 +41,8 @@ export const RetrieveCompletedTherapySessionClient = "api/client/retrieve-comple
 
 export const UpdateTherapySession = "api/client/update-therapy-session/"
 export const DeleteTherapySession = "api/client/delete-therapy-session/"
+
+export const RemoveTheAvailableSessionByOneURL = "api/client/reduce-the-available-session-by-one/"
 
 
 

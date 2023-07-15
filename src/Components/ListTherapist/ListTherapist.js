@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 
 
-import { allApprovedTherapists, gettherapistAdditionalDetails, ListCreateTherapySession,retrieveSubscriptionClient } from '../../Utils/constants'
+import { gettherapistAdditionalDetails,retrieveSubscriptionClient } from '../../Utils/constants'
 
 const ListTherapist = () => {
 
@@ -85,7 +85,7 @@ const ListTherapist = () => {
               headers:{"Authorization": `Bearer ${access}`}
             })
             .then((response)=>{
-              // console.log(response.data)
+              console.log(response.data)
               setUserPlan(response.data)
             })
             .catch((error)=>console.log(error))
@@ -96,7 +96,7 @@ const ListTherapist = () => {
 
          
 
-      }, [gettherapistAdditionalDetails, retrieveSubscriptionClient]);
+      }, [ access, client, therapistId]);
 
 
       // useEffect(() => {
@@ -119,16 +119,13 @@ const ListTherapist = () => {
 
    
 
-      
-
-        // console.log(userPlan)
-      if (userPlan && client) {
+      if (userPlan !=="No Subscription" && client) {
         navigate(`/our-therapists/book-a-session/${therapistId}/${therapistName}`)
         
       }else if (!client) {
         navigate("/login")
       }
-      else {
+      else if (userPlan==="No Subscription"){
         navigate("/pricing-and-plans")
       }
 
@@ -177,8 +174,8 @@ const ListTherapist = () => {
                         <span className="mb-3 text-sm text-gray-500">{therapist.qualification}</span>
                         <p className='className="m-1 text-sm font-medium text-gray-900"'>Next Available at - {therapist.next_available} </p>
                         <div className="flex mt-4 space-x-10 md:mt-6">
-                            <a href="/#" className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none  ">View Profile</a>
-                            <a  onClick={()=>bookASession(therapist.therapist, therapist.therapist_name)}  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300  cursor-pointer">Book a session</a>
+                            <button  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none  ">View Profile</button>
+                            <button  onClick={()=>bookASession(therapist.therapist, therapist.therapist_name)}  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300  cursor-pointer">Book a session</button>
                         </div>
                     </div>
 

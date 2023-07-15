@@ -1,8 +1,9 @@
-import React, { useRef, Fragment, useState, useEffect } from 'react'
+import React, { useRef, Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import DropDown from '../Components/DropDown/DropDown'
+// import DropDown from '../Components/DropDown/DropDown'
 import { useNavigate } from 'react-router-dom'
 import DropDownRating from './DropDownRating'
+import { useSelector } from 'react-redux'
 
 
 
@@ -10,6 +11,10 @@ import DropDownRating from './DropDownRating'
 const SessionReview = () => {
     const cancelButtonRef = useRef(null)
     const navigate = useNavigate()
+
+    const client = useSelector(state=>state.clientAuth.client)
+   
+    // const therapist = useSelector(state=>state.therapistAuth.therapist) 
 
     const [joined, setJoined] = useState(true)
     const [rated, setRated] = useState("")
@@ -124,7 +129,12 @@ const SessionReview = () => {
                         <button
                             type="button"
                             className=" rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 sm:ml-3 sm:w-auto"
-                            onClick={()=>navigate("/client/dashboard")}
+                            onClick={()=>{
+                                client?
+                                navigate("/client/dashboard")
+                                :
+                                navigate("/therapist/dashboard")
+                            }}
                             
                         >
                             Skip

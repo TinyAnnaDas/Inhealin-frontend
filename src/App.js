@@ -32,7 +32,7 @@ import TherapistManageCalendar from './Pages/Therapist/TherapistManageCalendar';
 import TherapistHelpDesk from './Pages/Therapist/TherapistHelpDesk';
 import TherapistProfile from './Pages/Therapist/ThreapistProfile';
 import TherapistSignup from './Pages/Therapist/TherapistSignup';
-import TherapistManagement from './Pages/Admin/TherapistManagement';
+// import TherapistManagement from './Pages/Admin/TherapistManagement';
 import ResumePdf from './Components/TherapistSignup/ResumePdf';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
@@ -72,6 +72,7 @@ function App() {
           <Route path='/therapist/profile' element={<TherapistProfile/>}></Route>
           <Route path='/therapist/sessions' element={<TherapistSessions/>}></Route>
           <Route path='/therapist/sessions/:sessionId' element={<VideoRoom/>}/>
+          <Route path='/therapist/sessions/:sessionId/review' element={<SessionReview/>}/>
           <Route path='/therapist/my-chats' element={<TherapistChats/>}></Route>
           <Route path='/therapist/manage-calendar' element={<TherapistManageCalendar/>}></Route>
           <Route path='/therapist/help-desk' element={<TherapistHelpDesk/>}></Route>

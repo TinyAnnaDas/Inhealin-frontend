@@ -42,7 +42,7 @@ const VideoRoom = () => {
 
     let name = client1?client1.name:therapist.name
 
-    let [nameJ, setNameJ] = useState("")
+    // let [nameJ, setNameJ] = useState("")
 
     let [member, setMember] = useState("")
 
@@ -104,7 +104,7 @@ const VideoRoom = () => {
 
         deleteMember(uid)
 
-        navigate(`/client/sessions/${sessionId}/review`)
+        navigate(`${client1? `/client/sessions/${sessionId}/review`: `/therapist/sessions/${sessionId}/review`}`)
 
     }
 
@@ -422,15 +422,15 @@ const VideoRoom = () => {
 
                 <div id='controls-wrapper ' className='p-5' style={{ display: "flex", width: "100%", justifyContent: "center", columnGap: "1em", position: "fixed", bottom: "20px"}}>
 
-                    <div class="icon-wrapper" onClick={toggleMic}>
+                    <div className="icon-wrapper" onClick={toggleMic}>
                         <img src={microphoneIcon} className="w-12 h-12" style={{ backgroundColor:" #fff", cursor: "pointer", padding: "10px", borderRadius: "5px"}} id="mic-btn"  alt="mic"/>
                     </div>
 
-                    <div class="icon-wrapper" onClick={toggleCamera}>
+                    <div className="icon-wrapper" onClick={toggleCamera}>
                         <img src={videoIcon} className="w-12 h-12" style={{ backgroundColor:" #fff", cursor: "pointer", padding: "10px", borderRadius: "5px", }}  />
                     </div>
 
-                    <div class="icon-wrapper" onClick={leaveAndRemoveLocalStream}>
+                    <div className="icon-wrapper" onClick={leaveAndRemoveLocalStream}>
                         <img src={leaveIcon}  className="w-12 h-12 " style={{ backgroundColor: "rgb(255, 80, 80, 1)", cursor: "pointer", padding: "10px", borderRadius: "5px"}}  />
                     </div>
 

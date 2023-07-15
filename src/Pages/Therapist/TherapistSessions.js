@@ -196,7 +196,7 @@ const TherapistSessions = () => {
 
                   <div className='flex flex-row justify-center'>
                     <div className="flex items-center mr-4">
-                        <input checked={upcomingSessions} onClick={() => {
+                        <input checked={upcomingSessions} onChange={() => {
                           setUpcomingSessions(true) 
                           setCompletedSessions(false)
 
@@ -204,7 +204,7 @@ const TherapistSessions = () => {
                         <label htmlFor="inline-2-radio" className="ml-2 text-sm font-medium text-gray-900 ">Upcoming Sessions</label>
                     </div>
                     <div className="flex items-center mr-4">
-                        <input checked={completedSessions} onClick={() => {
+                        <input checked={completedSessions} onChange={() => {
                            setCompletedSessions(true)
                            setUpcomingSessions(false)
                         }} id="inline-checked-radio" type="radio"  name="inline-radio-group" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500  focus:ring-2 "/>
@@ -226,7 +226,7 @@ const TherapistSessions = () => {
                                 
                               </div>
                               <div className="flex flex-col items-center pb-10">
-                                  <img className="w-24 h-24 mb-3  " src={require("../../assets/chat-icon.png")} alt="Bonnie image"/>
+                                  <img className="w-24 h-24 mb-3  " src={require("../../assets/chat-icon.png")} alt="Chat-icon"/>
                                   <h5 className="mb-1 text-xl font-medium text-gray-900 ">{clientData.name}</h5>
                                   <p>No Upcoming Sessions</p>
                                   <div className="flex mt-4 space-x-3 md:mt-6">
@@ -251,15 +251,15 @@ const TherapistSessions = () => {
                               
                             </div>
                             <div className="flex flex-col items-center pb-10">
-                                <img className="w-24 h-24 mb-3  " src={require("../../assets/chat-icon.png")} alt="Bonnie image"/>
+                                <img className="w-24 h-24 mb-3  " src={require("../../assets/chat-icon.png")} alt="chat-icon"/>
                                 <h5 className="mb-1 text-xl font-medium text-gray-900 ">{clientData.name}</h5>
                                 <p>Session Id - {sessionData.id}</p>
                                 <span className="text-sm text-gray-500 ">Scheduled Time - {sessionData.scheduled_time}</span>
                                 <div className="flex mt-4 space-x-3 md:mt-6">
-                                  <a href="#" className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200  ">Cancel Session</a>
+                                  <button  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200  ">Cancel Session</button>
 
                                   {!joined && 
-                                    <a href="#" className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 " onClick={()=>navigate(`/client/sessions/${sessionData.id}`)}>Join Session</a>
+                                    <button  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 " onClick={()=>navigate(`/therapist/sessions/${sessionData.id}`)}>Join Session</button>
 
                                   }
                                   
@@ -288,7 +288,7 @@ const TherapistSessions = () => {
                                 
                               </div>
                               <div className="flex flex-col items-center pb-10">
-                                  <img className="w-24 h-24 mb-3  " src={require("../../assets/chat-icon.png")} alt="Bonnie image"/>
+                                  <img className="w-24 h-24 mb-3  " src={require("../../assets/chat-icon.png")} alt="chat-icon"/>
                                   <h5 className="mb-1 text-xl font-medium text-gray-900 ">{clientData.name}</h5>
                                   <p>No Upcoming Sessions</p>
                                   <div className="flex mt-4 space-x-3 md:mt-6">
@@ -319,7 +319,7 @@ const TherapistSessions = () => {
                                   
                                 </div>
                                 <div className="flex flex-col items-center pb-10">
-                                    <img className="w-24 h-24 mb-3  " src={require("../../assets/chat-icon.png")} alt="Bonnie image"/>
+                                    <img className="w-24 h-24 mb-3  " src={require("../../assets/chat-icon.png")} alt="chat-icon"/>
                                     <h5 className="mb-1 text-xl font-medium text-gray-900 ">{completedSessions.therapist_name}</h5>
                                     <p>Session Id - {completedSessions.id}</p>
                                     <span className="text-sm text-gray-500 ">Scheduled Time - {completedSessions.scheduled_time}</span>

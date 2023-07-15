@@ -44,7 +44,7 @@ function TherapistChats() {
       headers: { "Authorization": `Bearer ${access}` }
     })
       .then((response) => {
-        // console.log(response.data) s
+        console.log(response.data)
         setClients(response.data)
       })
       .catch((error) => console.log(error))

@@ -1,7 +1,7 @@
 import React, { useRef, Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useSelector } from 'react-redux';
+
 import { DeleteTherapySession } from '../../Utils/constants';
 import axios from "../../Utils/axios"
 
@@ -22,7 +22,14 @@ const CancelTherapySession = ({cancelSessionOpen, setCancelSessionOpen, therapis
         const authTokensClient = JSON.parse(localStorage.getItem('authTokensClient'))
         const access = authTokensClient.access
 
-        axios.delete(`${DeleteTherapySession}${sessionId}/`, {
+        const body = new FormData()
+        body.append("session_booked", "false")
+        body.append("booked_session", null)
+
+        
+   
+
+        axios.put(`${DeleteTherapySession}${sessionId}/`, body, {
             headers: { 
                 "Authorization": `Bearer ${access}`
             }

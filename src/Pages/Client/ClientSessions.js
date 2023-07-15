@@ -197,7 +197,7 @@ const ClientSessions = () => {
 
                   <div className='flex flex-row justify-center'>
                     <div className="flex items-center mr-4" >
-                        <input checked={upcomingSessions} onClick={() => {
+                        <input checked={upcomingSessions} onChange={() => {
                           setUpcomingSessions(true) 
                           setCompletedSessions(false)
                           }} 
@@ -206,7 +206,7 @@ const ClientSessions = () => {
                         <label htmlFor="inline-2-radio" className="ml-2 text-sm font-medium text-gray-900 ">Upcoming Sessions</label>
                     </div>
                     <div className="flex items-center mr-4">
-                        <input checked={completedSessions} onClick={() => {
+                        <input checked={completedSessions} onChange={() => {
                           setCompletedSessions(true)
                           setUpcomingSessions(false)
                         }}  
@@ -309,11 +309,11 @@ const ClientSessions = () => {
                       (
                        <>
                        {
-                        completedSessionsData.map((completedSessions)=>{
+                        completedSessionsData.map((completedSessions, index)=>{
 
                         return (
 
-                          <div className='flex justify-center mt-10'>
+                          <div key={index} className='flex justify-center mt-10'>
                             <div className=" w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow ">
                                 <div className="flex justify-center p-5">
                                     Completed Video Session

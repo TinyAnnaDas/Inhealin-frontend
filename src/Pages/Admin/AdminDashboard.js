@@ -11,6 +11,7 @@ import DNavbar from '../../Components/Navbar/DNavbar';
 import FeedbackOutlinedIcon from '@mui/icons-material/FeedbackOutlined';
 import DocumentScannerOutlinedIcon from '@mui/icons-material/DocumentScannerOutlined';
 import OndemandVideoOutlinedIcon from '@mui/icons-material/OndemandVideoOutlined';
+import Chart from '../../Components/chart';
 
 
 
@@ -86,9 +87,9 @@ const AdminDashboard = () => {
           <DNavbar adminDashboard={adminDashboard}/>
           <div className="relative bg-lightBlue-600 md:pt-28 pb-32 pt-12">
             <div className="px-4 md:px-10 mx-auto w-full">
-              <div className=" w-full p-4 text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+              <div className=" w-full p-4 text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8">
 
-                    Administration Dashboard
+                    <Chart/>
           
               </div>
             </div>

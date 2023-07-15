@@ -1,48 +1,14 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    theme: {
-      extend: {
-        gridTemplateRows: {
-          '[auto,auto,1fr]': 'auto auto 1fr',
-        },
-      },
-    },
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
-// import { useState } from 'react'
-// import { StarIcon } from '@heroicons/react/20/solid'
-// import { RadioGroup } from '@headlessui/react'
-
-
-// const reviews = { href: '#', average: 4, totalCount: 117 }
-
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(' ')
-// }
 
 
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { retrieveSubscription } from '../Utils/constants';
+import {  useNavigate, useParams } from 'react-router-dom';
+import { retrieveSubscription, retrieveSubscriptionClient } from '../Utils/constants';
 
 import axios from "../Utils/axios"
 import { processSubscription } from '../Utils/constants';
-import { useSelector } from 'react-redux';
+
 import { ToastContainer, toast } from 'react-toastify';
 
-
-
-// import { useSelector } from 'react-redux';
 
 
 export default function OrderSummary() {
@@ -53,23 +19,43 @@ export default function OrderSummary() {
 //   const subscriptions = useSelector (state=>state.subscriptions)
 
 //   console.log(subscriptions);
-    const client = useSelector(state=>state.clientAuth.client)  
-    console.log(client)
+    // const client = useSelector(state=>state.clientAuth.client)  
+    // console.log(client)
+
+    const [myPlan, setMyPlan] = useState("")
    
 
     const navigate = useNavigate()
 
-   const [selectedSubscription, setSelectedSubscription] = useState([])
+    const [selectedSubscription, setSelectedSubscription] = useState([])
+
+    const authTokensClient = JSON.parse(localStorage.getItem('authTokensClient'))
+    const access = authTokensClient?.access
 
   useEffect(()=> {
 
    
-    axios.get(`${retrieveSubscription}${id}/`)
+    axios.get(`${retrieveSubscription}${id}/`, {
+        headers: {"Authorization": `Bearer ${access}`}
+    })
     .then((response)=> {
         // console.log(response);
         setSelectedSubscription(response.data)
     })
     .catch((error)=> console.log(error))
+
+
+
+
+    axios.get(retrieveSubscriptionClient, {
+        headers:{"Authorization": `Bearer ${access}`}
+    })
+    .then((response)=>{
+        console.log(response.data)
+        setMyPlan(response.data)
+    })
+    .catch((error)=>console.log(error))
+
 
   }, [id])
 
@@ -101,8 +87,7 @@ export default function OrderSummary() {
 //       autoClose: 3000,
 //       })
 //   }
-
-  console.log(client.subscription)
+ 
 
 
   const processOrder = (id)=>{
@@ -111,7 +96,7 @@ export default function OrderSummary() {
     const access = authTokensClient.access;
 
     
-    if (client.subscription){
+    if (myPlan !== "No Subscription"){
 
        
         toast.success("You already have a plan purchased. Please schedule the session. Redirecting to dashboard...", {
@@ -123,9 +108,6 @@ export default function OrderSummary() {
              navigate("/client/dashboard");
       
           }, 5000);
-
-        // alert(`Your are already subscribed to plan: ${client.subscription} Navigating to dashbaord...`)
-        // return  navigate("/client/dashboard");
     
     } 
    
@@ -152,6 +134,7 @@ export default function OrderSummary() {
                 headers:{"Authorization": `Bearer ${access}`}
             })
             .then((response)=>{
+                console.log(response.data)
 
                 navigate("/client/dashboard")
             })

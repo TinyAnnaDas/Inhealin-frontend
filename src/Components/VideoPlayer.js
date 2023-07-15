@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
 
-export const VideoPlayer = ({ user, client1, therapist, updatedUser }) => {
+
+export const VideoPlayer = ({ user }) => {
 
   console.log("user...", user)
 
