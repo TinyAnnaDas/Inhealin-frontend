@@ -1,6 +1,6 @@
 // export const baseUrl = "http://localhost:8000/"
 
-export const baseUrl = "https://inhealin.website/"
+export const baseUrl = "https://www.inhealin.website/"
 
 export const register = "api/client/register"
 export const login = "api/token/";
