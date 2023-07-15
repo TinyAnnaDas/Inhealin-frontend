@@ -74,7 +74,7 @@ const Chats = ({clients, therapists}) => {
       .catch((error)=>console.log(error))
 
 
-      const newWs = new WebSocket('wss://inhealin.website/ws/ajwc/' + groupName + '/' + user_id + '/');
+      const newWs = new WebSocket('wss://www.inhealin.website/ws/ajwc/' + groupName + '/' + user_id + '/');
       // const newWs = new WebSocket('ws://localhost:8000/ws/ajwc/' + groupName + '/' + user_id + '/');
 
 
